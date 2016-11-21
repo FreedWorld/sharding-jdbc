@@ -15,6 +15,7 @@
         <module>sharding-jdbc-config-common</module>
         <module>sharding-jdbc-config-yaml</module>
         <module>sharding-jdbc-config-spring</module>
+        <module>sharding-jdbc-config-hash</module>
     </modules>
     
     <dependencies>

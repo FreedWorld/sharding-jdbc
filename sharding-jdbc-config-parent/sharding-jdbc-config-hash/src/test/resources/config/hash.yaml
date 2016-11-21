@@ -1,0 +1,57 @@
+dataSource:
+  db0: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db0?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+  db1: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db1?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+  db2: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db2?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+  db3: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db3?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+
+##此处不需要配置,能通过hash计算得到
+#tables:
+#  snowflake_hash:
+#    dynamic: true
+#    tableStrategy:
+#      shardingColumns: id
+#      algorithmClassName: com.dangdang.ddframe.rdb.sharding.config.yaml.hash.algorithm.HashAlgorithm
+#    databaseStrategy:
+#      shardingColumns: id
+#      algorithmClassName: com.dangdang.ddframe.rdb.sharding.config.yaml.hash.algorithm.HashDatabaseAlgorithm
+
+hash:
+  snowflake_hash.id:
+    2016-10-31T17:00:00:
+      0x0000:
+        database: db0
+        tables:
+          0x0000: t_snowflake_hash_0
+          0x8000: t_snowflake_hash_1
+      0x8000:
+        database: db1
+        tables:
+          0x0000: t_snowflake_hash_2
+          0x8000: t_snowflake_hash_3
+    2016-11-20T17:00:00+08:
+      0x0000:
+        database: db2
+        tables:
+          0x0000: t_snowflake_hash_4
+          0x8000: t_snowflake_hash_5
+      0x8000:
+        database: db3
+        tables:
+          0x0000: t_snowflake_hash_6
+          0x8000: t_snowflake_hash_7

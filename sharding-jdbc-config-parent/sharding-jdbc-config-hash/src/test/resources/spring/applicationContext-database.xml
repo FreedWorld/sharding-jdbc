@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--数据源-->
+    <bean id="dataSource" class="com.dangdang.ddframe.rdb.sharding.config.yaml.hash.api.HashShardingDataSource">
+        <constructor-arg type="java.io.File">
+            <bean class="org.springframework.util.ResourceUtils" factory-method="getFile">
+                <constructor-arg type="java.lang.String" value="classpath:config/hash.yaml"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <!--SqlMapper-->
+    <bean id="sqlMapper" class="com.dangdang.ddframe.rdb.sharding.config.yaml.hash.mapper.SqlMapper">
+        <constructor-arg type="org.apache.ibatis.session.SqlSessionFactory">
+            <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+                <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+                <property name="dataSource" ref="dataSource"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="db0" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db0"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+    <bean id="db1" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+    <bean id="db2" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db2"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+    <bean id="db3" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db3"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <bean id="db0Mapper" class="com.dangdang.ddframe.rdb.sharding.config.yaml.hash.mapper.SqlMapper">
+        <constructor-arg type="org.apache.ibatis.session.SqlSessionFactory">
+            <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+                <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+                <property name="dataSource" ref="db0"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="db1Mapper" class="com.dangdang.ddframe.rdb.sharding.config.yaml.hash.mapper.SqlMapper">
+        <constructor-arg type="org.apache.ibatis.session.SqlSessionFactory">
+            <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+                <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+                <property name="dataSource" ref="db1"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="db2Mapper" class="com.dangdang.ddframe.rdb.sharding.config.yaml.hash.mapper.SqlMapper">
+        <constructor-arg type="org.apache.ibatis.session.SqlSessionFactory">
+            <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+                <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+                <property name="dataSource" ref="db2"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="db3Mapper" class="com.dangdang.ddframe.rdb.sharding.config.yaml.hash.mapper.SqlMapper">
+        <constructor-arg type="org.apache.ibatis.session.SqlSessionFactory">
+            <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+                <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+                <property name="dataSource" ref="db3"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+</beans>
